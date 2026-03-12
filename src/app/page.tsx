@@ -1,65 +1,110 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { FileText, BarChart3, Zap } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div className="min-h-screen flex flex-col">
+      {/* Nav */}
+      <header className="border-b">
+        <div className="container mx-auto flex items-center justify-between px-4 py-4">
+          <span className="text-xl font-bold">NJ Bill Analyzer</span>
+          <div className="flex gap-2">
+            <Link
+              href="/login"
+              className={cn(buttonVariants({ variant: "ghost" }))}
+            >
+              Log in
+            </Link>
+            <Link href="/signup" className={cn(buttonVariants())}>
+              Sign up
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <main className="flex-1">
+        <section className="container mx-auto px-4 py-24 text-center">
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+            Understand Your NJ
+            <br />
+            <span className="text-primary">Commercial Energy Bills</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            Upload your utility bills and instantly see what you&apos;re paying,
+            how much energy you&apos;re using, and where you can save. Built for
+            New Jersey businesses.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+          <div className="mt-10 flex justify-center gap-4">
+            <Link
+              href="/signup"
+              className={cn(buttonVariants({ size: "lg" }))}
+            >
+              Get Started Free
+            </Link>
+            <Link
+              href="/login"
+              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+            >
+              Log In
+            </Link>
+          </div>
+        </section>
+
+        {/* Feature Cards */}
+        <section className="container mx-auto px-4 pb-24">
+          <div className="grid gap-6 md:grid-cols-3">
+            <Card>
+              <CardHeader>
+                <FileText className="h-10 w-10 text-primary mb-2" />
+                <CardTitle>Upload Bills</CardTitle>
+                <CardDescription>
+                  Simply upload your commercial energy bills in any format.
+                  We&apos;ll extract the key data automatically.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <BarChart3 className="h-10 w-10 text-primary mb-2" />
+                <CardTitle>Track Spending</CardTitle>
+                <CardDescription>
+                  See your energy costs over time. Identify trends and spot
+                  unexpected charges on your NJ utility bills.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <Zap className="h-10 w-10 text-primary mb-2" />
+                <CardTitle>Save Energy</CardTitle>
+                <CardDescription>
+                  Get insights into your kWh usage patterns and find
+                  opportunities to reduce your commercial energy costs.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        </section>
       </main>
+
+      {/* Footer */}
+      <footer className="border-t py-6">
+        <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
+          &copy; {new Date().getFullYear()} NJ Bill Analyzer. All rights
+          reserved.
+        </div>
+      </footer>
     </div>
   );
 }
