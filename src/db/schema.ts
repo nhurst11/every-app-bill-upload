@@ -83,6 +83,13 @@ export const bills = pgTable("bills", {
   billingPeriodEnd: timestamp("billing_period_end", { mode: "date" }),
   totalAmount: numeric("total_amount", { precision: 10, scale: 2 }),
   totalKwh: numeric("total_kwh", { precision: 12, scale: 2 }),
+  supplyRatePerKwh: numeric("supply_rate_per_kwh", { precision: 8, scale: 4 }),
+  deliveryCharges: numeric("delivery_charges", { precision: 10, scale: 2 }),
+  demandKw: numeric("demand_kw", { precision: 10, scale: 2 }),
+  demandCharges: numeric("demand_charges", { precision: 10, scale: 2 }),
+  taxesAndFees: numeric("taxes_and_fees", { precision: 10, scale: 2 }),
+  rateClass: varchar("rate_class", { length: 50 }),
+  analysisJson: text("analysis_json"),
   status: varchar("status", { length: 50 }).default("pending").notNull(),
   uploadedAt: timestamp("uploaded_at", { mode: "date" }).defaultNow().notNull(),
 });

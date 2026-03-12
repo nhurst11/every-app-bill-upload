@@ -1,5 +1,8 @@
 import { auth, signOut } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { db } from "@/db";
+import { bills } from "@/db/schema";
+import { eq, sum, count } from "drizzle-orm";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,13 +11,48 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { DashboardClient } from "./dashboard-client";
 
 export default async function DashboardPage() {
   const session = await auth();
 
-  if (!session?.user) {
+  if (!session?.user?.id) {
     redirect("/login");
   }
+
+  const userId = session.user.id;
+
+  // Fetch stats from the database
+  const [stats] = await db
+    .select({
+      billCount: count(),
+      totalSpent: sum(bills.totalAmount),
+      totalKwh: sum(bills.totalKwh),
+    })
+    .from(bills)
+    .where(eq(bills.userId, userId));
+
+  const billCount = stats?.billCount ?? 0;
+  const totalSpent = stats?.totalSpent ? Number(stats.totalSpent) : 0;
+  const totalKwh = stats?.totalKwh ? Number(stats.totalKwh) : 0;
+
+  // Fetch bills list
+  const userBills = await db
+    .select()
+    .from(bills)
+    .where(eq(bills.userId, userId))
+    .orderBy(bills.uploadedAt);
+
+  // Serialize for client component
+  const serializedBills = userBills.map((bill) => ({
+    id: bill.id,
+    fileName: bill.fileName,
+    utilityProvider: bill.utilityProvider,
+    totalAmount: bill.totalAmount,
+    totalKwh: bill.totalKwh,
+    status: bill.status,
+    uploadedAt: bill.uploadedAt.toISOString(),
+  }));
 
   return (
     <div className="min-h-screen">
@@ -51,7 +89,7 @@ export default async function DashboardPage() {
               <CardDescription>Total bills analyzed</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-4xl font-bold">0</p>
+              <p className="text-4xl font-bold">{billCount}</p>
             </CardContent>
           </Card>
           <Card>
@@ -60,7 +98,9 @@ export default async function DashboardPage() {
               <CardDescription>Across all bills</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-4xl font-bold">$0.00</p>
+              <p className="text-4xl font-bold">
+                ${totalSpent.toFixed(2)}
+              </p>
             </CardContent>
           </Card>
           <Card>
@@ -69,21 +109,17 @@ export default async function DashboardPage() {
               <CardDescription>Energy consumed</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-4xl font-bold">0</p>
+              <p className="text-4xl font-bold">
+                {totalKwh.toLocaleString()}
+              </p>
             </CardContent>
           </Card>
         </div>
 
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Get Started</CardTitle>
-            <CardDescription>
-              Bill upload functionality is coming soon! In the next phase,
-              you&apos;ll be able to upload your NJ commercial energy bills and
-              see detailed analysis here.
-            </CardDescription>
-          </CardHeader>
-        </Card>
+        {/* Upload + Bills Table (client component for interactivity) */}
+        <div className="mt-8">
+          <DashboardClient bills={serializedBills} />
+        </div>
       </main>
     </div>
   );
