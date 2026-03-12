@@ -41,6 +41,13 @@ export default async function DashboardPage() {
     utilityProvider: bill.utilityProvider,
     totalAmount: bill.totalAmount,
     totalKwh: bill.totalKwh,
+    supplyRatePerKwh: bill.supplyRatePerKwh,
+    deliveryCharges: bill.deliveryCharges,
+    demandKw: bill.demandKw,
+    demandCharges: bill.demandCharges,
+    taxesAndFees: bill.taxesAndFees,
+    billingPeriodStart: bill.billingPeriodStart?.toISOString() ?? null,
+    billingPeriodEnd: bill.billingPeriodEnd?.toISOString() ?? null,
     status: bill.status,
     uploadedAt: bill.uploadedAt.toISOString(),
   }));

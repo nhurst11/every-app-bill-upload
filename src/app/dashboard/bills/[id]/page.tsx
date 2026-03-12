@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SavingsCard } from "@/components/savings-card";
 import { ArrowLeft, Zap, DollarSign, Gauge } from "lucide-react";
+import { CostBreakdownChart } from "@/components/cost-breakdown-chart";
+import { RateComparisonChart } from "@/components/rate-comparison-chart";
 
 export default async function BillDetailPage({
   params,
@@ -189,6 +191,24 @@ export default async function BillDetailPage({
               ))}
             </dl>
           </div>
+        </div>
+
+        {/* Charts Row */}
+        <div className="mt-6 grid gap-6 lg:grid-cols-2">
+          <CostBreakdownChart
+            supplyCost={
+              bill.supplyRatePerKwh && bill.totalKwh
+                ? (Number(bill.supplyRatePerKwh) * Number(bill.totalKwh)) / 100
+                : null
+            }
+            deliveryCharges={bill.deliveryCharges ? Number(bill.deliveryCharges) : null}
+            demandCharges={bill.demandCharges ? Number(bill.demandCharges) : null}
+            taxesAndFees={bill.taxesAndFees ? Number(bill.taxesAndFees) : null}
+          />
+          <RateComparisonChart
+            supplyRatePerKwh={bill.supplyRatePerKwh}
+            utilityProvider={bill.utilityProvider}
+          />
         </div>
 
         {/* Savings Analysis */}
