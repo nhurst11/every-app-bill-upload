@@ -1,12 +1,4 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import {
   Table,
   TableBody,
   TableCell,
@@ -14,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
 import {
   findUtilityByName,
   calculateSavings,
@@ -22,7 +15,7 @@ import {
 
 interface SavingsCardProps {
   utilityProvider: string | null;
-  supplyRatePerKwh: string | null; // cents
+  supplyRatePerKwh: string | null;
   totalKwh: string | null;
 }
 
@@ -37,15 +30,13 @@ export function SavingsCard({
 
   if (!supplyRate || !kwh) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>Savings Analysis</CardTitle>
-          <CardDescription>
-            Not enough data to calculate savings. We need your supply rate and kWh
-            usage from the bill.
-          </CardDescription>
-        </CardHeader>
-      </Card>
+      <div className="glass rounded-xl p-6">
+        <h3 className="text-lg font-semibold mb-2">Savings Analysis</h3>
+        <p className="text-sm text-muted-foreground">
+          Not enough data to calculate savings. We need your supply rate and kWh
+          usage from the bill.
+        </p>
+      </div>
     );
   }
 
@@ -56,106 +47,112 @@ export function SavingsCard({
   const hasSavings = bestSaving.annualSavings > 0;
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Savings Analysis</CardTitle>
-        <CardDescription>
-          {utility
-            ? `Your rate vs ${utility.name} BGS rate and third-party suppliers`
-            : "Your rate vs NJ third-party energy suppliers"}
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        {/* Current rate comparison */}
-        {utility && (
-          <div className="mb-6 rounded-lg bg-muted/50 p-4">
-            <p className="text-sm text-muted-foreground">Your supply rate</p>
-            <p className="text-2xl font-bold">{supplyRate.toFixed(2)}&cent;/kWh</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {utility.name} BGS rate: {utility.supplyRate.toFixed(2)}&cent;/kWh
-              {supplyRate > utility.supplyRate ? (
-                <span className="ml-2 text-red-600">
-                  (you&apos;re paying {(supplyRate - utility.supplyRate).toFixed(2)}&cent; more)
-                </span>
-              ) : (
-                <span className="ml-2 text-green-600">
-                  (you&apos;re paying {(utility.supplyRate - supplyRate).toFixed(2)}&cent; less)
-                </span>
-              )}
-            </p>
-          </div>
-        )}
+    <div className="glass rounded-xl p-6">
+      <h3 className="text-lg font-semibold mb-1">Savings Analysis</h3>
+      <p className="text-sm text-muted-foreground mb-6">
+        {utility
+          ? `Your rate vs ${utility.name} BGS rate and third-party suppliers`
+          : "Your rate vs NJ third-party energy suppliers"}
+      </p>
 
-        {/* Third-party supplier comparison */}
-        {hasSavings ? (
-          <>
-            <p className="mb-3 text-sm font-medium">
-              Third-party supplier options:
-            </p>
-            <div className="rounded-lg border">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Supplier</TableHead>
-                    <TableHead className="text-right">Rate</TableHead>
-                    <TableHead>Term</TableHead>
-                    <TableHead className="text-right">Monthly Savings</TableHead>
-                    <TableHead className="text-right">Annual Savings</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {savings
-                    .filter((s) => s.annualSavings > 0)
-                    .sort((a, b) => b.annualSavings - a.annualSavings)
-                    .map((s) => {
-                      const supplier = thirdPartySuppliers.find(
-                        (tp) => tp.supplier === s.supplier
-                      )!;
-                      const isBest = s.supplier === bestSaving.supplier;
-                      return (
-                        <TableRow key={s.supplier}>
-                          <TableCell className="font-medium">
-                            {s.supplier}
-                            {supplier.renewable && (
-                              <Badge variant="outline" className="ml-2">
-                                Green
-                              </Badge>
-                            )}
-                            {isBest && (
-                              <Badge className="ml-2 bg-green-600">
-                                Best
-                              </Badge>
-                            )}
-                          </TableCell>
-                          <TableCell className="text-right">
-                            {s.comparisonRate.toFixed(2)}&cent;
-                          </TableCell>
-                          <TableCell>{supplier.term}</TableCell>
-                          <TableCell className="text-right font-medium text-green-600">
-                            ${s.monthlySavings.toFixed(2)}
-                          </TableCell>
-                          <TableCell className="text-right font-medium text-green-600">
-                            ${s.annualSavings.toFixed(2)}
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </div>
-          </>
-        ) : (
-          <div className="rounded-lg bg-green-50 p-4 text-center dark:bg-green-950">
-            <p className="text-lg font-medium text-green-700 dark:text-green-300">
-              You&apos;re already competitive!
-            </p>
-            <p className="text-sm text-green-600 dark:text-green-400">
-              Your supply rate of {supplyRate.toFixed(2)}&cent;/kWh is at or below
-              most third-party supplier rates.
-            </p>
+      {/* Current rate comparison */}
+      {utility && (
+        <div className="mb-6 rounded-xl bg-white/[0.03] border border-white/5 p-5">
+          <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
+            Your supply rate
+          </p>
+          <p className="text-3xl font-bold tabular-nums text-cyan text-glow-cyan">
+            {supplyRate.toFixed(2)}&cent;<span className="text-base font-normal text-muted-foreground">/kWh</span>
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            {utility.name} BGS rate:{" "}
+            <span className="tabular-nums">{utility.supplyRate.toFixed(2)}&cent;/kWh</span>
+            {supplyRate > utility.supplyRate ? (
+              <span className="ml-2 text-red-400">
+                ({(supplyRate - utility.supplyRate).toFixed(2)}&cent; more)
+              </span>
+            ) : (
+              <span className="ml-2 text-cyan">
+                ({(utility.supplyRate - supplyRate).toFixed(2)}&cent; less)
+              </span>
+            )}
+          </p>
+        </div>
+      )}
+
+      {/* Third-party supplier comparison */}
+      {hasSavings ? (
+        <>
+          <p className="mb-3 text-sm font-medium">
+            Third-party supplier options:
+          </p>
+          <div className="rounded-xl overflow-hidden border border-white/5">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-white/5 hover:bg-transparent">
+                  <TableHead className="text-muted-foreground">Supplier</TableHead>
+                  <TableHead className="text-right text-muted-foreground">Rate</TableHead>
+                  <TableHead className="text-muted-foreground">Term</TableHead>
+                  <TableHead className="text-right text-muted-foreground">Monthly</TableHead>
+                  <TableHead className="text-right text-muted-foreground">Annual</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {savings
+                  .filter((s) => s.annualSavings > 0)
+                  .sort((a, b) => b.annualSavings - a.annualSavings)
+                  .map((s) => {
+                    const supplier = thirdPartySuppliers.find(
+                      (tp) => tp.supplier === s.supplier
+                    )!;
+                    const isBest = s.supplier === bestSaving.supplier;
+                    return (
+                      <TableRow key={s.supplier} className="border-white/5 hover:bg-white/[0.02]">
+                        <TableCell className="font-medium">
+                          {s.supplier}
+                          {supplier.renewable && (
+                            <Badge
+                              variant="outline"
+                              className="ml-2 bg-cyan/5 text-cyan border-cyan/20"
+                            >
+                              Green
+                            </Badge>
+                          )}
+                          {isBest && (
+                            <Badge className="ml-2 bg-gradient-to-r from-cyan to-purple text-[#0B0F19] border-0">
+                              Best
+                            </Badge>
+                          )}
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums">
+                          {s.comparisonRate.toFixed(2)}&cent;
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">{supplier.term}</TableCell>
+                        <TableCell className="text-right tabular-nums font-medium text-cyan">
+                          ${s.monthlySavings.toFixed(2)}
+                        </TableCell>
+                        <TableCell className="text-right tabular-nums font-medium text-cyan">
+                          ${s.annualSavings.toFixed(2)}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
           </div>
-        )}
-      </CardContent>
-    </Card>
+        </>
+      ) : (
+        <div className="rounded-xl bg-cyan/5 border border-cyan/10 p-5 text-center">
+          <p className="text-lg font-medium text-cyan text-glow-cyan">
+            You&apos;re already competitive!
+          </p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Your supply rate of{" "}
+            <span className="tabular-nums">{supplyRate.toFixed(2)}&cent;/kWh</span> is at or below
+            most third-party supplier rates.
+          </p>
+        </div>
+      )}
+    </div>
   );
 }

@@ -4,17 +4,10 @@ import { db } from "@/db";
 import { bills } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 import Link from "next/link";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SavingsCard } from "@/components/savings-card";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Zap, DollarSign, Gauge } from "lucide-react";
 
 export default async function BillDetailPage({
   params,
@@ -48,138 +41,154 @@ export default async function BillDetailPage({
     val ? Number(val).toLocaleString() : "—";
 
   return (
-    <div className="min-h-screen">
-      <header className="border-b">
+    <div className="min-h-screen bg-grid">
+      {/* Header */}
+      <header className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto flex items-center gap-4 px-4 py-4">
           <Link href="/dashboard">
-            <Button variant="ghost" size="sm">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="hover:text-cyan hover:bg-cyan/5"
+            >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Dashboard
             </Button>
           </Link>
-          <span className="text-xl font-bold">NJ Bill Analyzer</span>
+          <span className="text-xl font-semibold tracking-tight">
+            <span className="text-cyan">NJ</span> Bill Analyzer
+          </span>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="mb-6 flex items-center gap-3">
+        {/* Title */}
+        <div className="mb-8 flex items-center gap-3">
           <h1 className="text-2xl font-bold">{bill.fileName}</h1>
           <Badge
-            variant={bill.status === "analyzed" ? "default" : "destructive"}
+            variant="outline"
+            className={
+              bill.status === "analyzed"
+                ? "bg-cyan/10 text-cyan border-cyan/20"
+                : "bg-red-500/10 text-red-400 border-red-500/20"
+            }
           >
             {bill.status}
           </Badge>
         </div>
 
+        {/* Key Metrics Row */}
+        <div className="mb-8 grid gap-4 md:grid-cols-4">
+          {[
+            {
+              icon: DollarSign,
+              label: "Total Amount",
+              value: formatMoney(bill.totalAmount),
+              color: "purple",
+            },
+            {
+              icon: Zap,
+              label: "Total kWh",
+              value: formatNumber(bill.totalKwh),
+              color: "cyan",
+            },
+            {
+              icon: Gauge,
+              label: "Supply Rate",
+              value: bill.supplyRatePerKwh
+                ? `${Number(bill.supplyRatePerKwh).toFixed(2)}\u00a2/kWh`
+                : "—",
+              color: "cyan",
+            },
+            {
+              icon: Zap,
+              label: "Peak Demand",
+              value: bill.demandKw
+                ? `${Number(bill.demandKw).toFixed(1)} kW`
+                : "—",
+              color: "purple",
+            },
+          ].map((metric) => (
+            <div
+              key={metric.label}
+              className="glass rounded-xl p-5"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <metric.icon
+                  className={`h-4 w-4 ${
+                    metric.color === "cyan" ? "text-cyan" : "text-purple"
+                  }`}
+                />
+                <span className="text-xs uppercase tracking-wider text-muted-foreground">
+                  {metric.label}
+                </span>
+              </div>
+              <p className="text-2xl font-bold tabular-nums">{metric.value}</p>
+            </div>
+          ))}
+        </div>
+
         <div className="grid gap-6 lg:grid-cols-2">
           {/* Bill Summary */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Bill Summary</CardTitle>
-              <CardDescription>Key information from your bill</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <dl className="space-y-3">
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Utility Provider</dt>
-                  <dd className="font-medium">
-                    {bill.utilityProvider ?? "—"}
-                  </dd>
+          <div className="glass rounded-xl p-6">
+            <h3 className="text-lg font-semibold mb-1">Bill Summary</h3>
+            <p className="text-sm text-muted-foreground mb-5">
+              Key information from your bill
+            </p>
+            <dl className="space-y-4">
+              {[
+                { label: "Utility Provider", value: bill.utilityProvider ?? "—" },
+                { label: "Account Number", value: bill.accountNumber ?? "—" },
+                {
+                  label: "Billing Period",
+                  value: `${formatDate(bill.billingPeriodStart)} – ${formatDate(bill.billingPeriodEnd)}`,
+                },
+                { label: "Rate Class", value: bill.rateClass ?? "—" },
+              ].map((item) => (
+                <div key={item.label} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                  <dt className="text-sm text-muted-foreground">{item.label}</dt>
+                  <dd className="font-medium">{item.value}</dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Account Number</dt>
-                  <dd className="font-medium">
-                    {bill.accountNumber ?? "—"}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Billing Period</dt>
-                  <dd className="font-medium">
-                    {formatDate(bill.billingPeriodStart)} &ndash;{" "}
-                    {formatDate(bill.billingPeriodEnd)}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Total Amount</dt>
-                  <dd className="text-xl font-bold">
-                    {formatMoney(bill.totalAmount)}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Total kWh</dt>
-                  <dd className="font-medium">
-                    {formatNumber(bill.totalKwh)}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Rate Class</dt>
-                  <dd className="font-medium">{bill.rateClass ?? "—"}</dd>
-                </div>
-              </dl>
-            </CardContent>
-          </Card>
+              ))}
+            </dl>
+          </div>
 
           {/* Cost Breakdown */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Cost Breakdown</CardTitle>
-              <CardDescription>
-                How your charges are split up
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <dl className="space-y-3">
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Supply Rate</dt>
-                  <dd className="font-medium">
-                    {bill.supplyRatePerKwh
-                      ? `${Number(bill.supplyRatePerKwh).toFixed(2)}¢/kWh`
-                      : "—"}
-                  </dd>
+          <div className="glass rounded-xl p-6">
+            <h3 className="text-lg font-semibold mb-1">Cost Breakdown</h3>
+            <p className="text-sm text-muted-foreground mb-5">
+              How your charges are split up
+            </p>
+            <dl className="space-y-4">
+              {[
+                {
+                  label: "Supply Rate",
+                  value: bill.supplyRatePerKwh
+                    ? `${Number(bill.supplyRatePerKwh).toFixed(2)}\u00a2/kWh`
+                    : "—",
+                },
+                {
+                  label: "Supply Cost (est.)",
+                  value:
+                    bill.supplyRatePerKwh && bill.totalKwh
+                      ? `$${((Number(bill.supplyRatePerKwh) * Number(bill.totalKwh)) / 100).toFixed(2)}`
+                      : "—",
+                },
+                { label: "Delivery Charges", value: formatMoney(bill.deliveryCharges) },
+                {
+                  label: "Demand (kW)",
+                  value: bill.demandKw ? `${Number(bill.demandKw).toFixed(1)} kW` : "—",
+                },
+                { label: "Demand Charges", value: formatMoney(bill.demandCharges) },
+                { label: "Taxes & Fees", value: formatMoney(bill.taxesAndFees) },
+              ].map((item) => (
+                <div key={item.label} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                  <dt className="text-sm text-muted-foreground">{item.label}</dt>
+                  <dd className="font-medium tabular-nums">{item.value}</dd>
                 </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">
-                    Supply Cost (estimated)
-                  </dt>
-                  <dd className="font-medium">
-                    {bill.supplyRatePerKwh && bill.totalKwh
-                      ? `$${(
-                          (Number(bill.supplyRatePerKwh) *
-                            Number(bill.totalKwh)) /
-                          100
-                        ).toFixed(2)}`
-                      : "—"}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Delivery Charges</dt>
-                  <dd className="font-medium">
-                    {formatMoney(bill.deliveryCharges)}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Demand (kW)</dt>
-                  <dd className="font-medium">
-                    {bill.demandKw
-                      ? `${Number(bill.demandKw).toFixed(1)} kW`
-                      : "—"}
-                  </dd>
-                </div>
-                <div className="flex justify-between">
-                  <dt className="text-muted-foreground">Demand Charges</dt>
-                  <dd className="font-medium">
-                    {formatMoney(bill.demandCharges)}
-                  </dd>
-                </div>
-                <div className="flex justify-between border-t pt-3">
-                  <dt className="text-muted-foreground">Taxes &amp; Fees</dt>
-                  <dd className="font-medium">
-                    {formatMoney(bill.taxesAndFees)}
-                  </dd>
-                </div>
-              </dl>
-            </CardContent>
-          </Card>
+              ))}
+            </dl>
+          </div>
         </div>
 
         {/* Savings Analysis */}

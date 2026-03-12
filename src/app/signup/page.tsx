@@ -32,7 +32,6 @@ export default function SignupPage() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
 
-    // Register the user
     const res = await fetch("/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -46,7 +45,6 @@ export default function SignupPage() {
       return;
     }
 
-    // Auto sign in after registration
     const result = await signIn("credentials", {
       email,
       password,
@@ -62,10 +60,18 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center px-4 bg-grid">
+      {/* Background glow */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute left-1/3 top-1/3 h-[400px] w-[400px] rounded-full bg-purple/5 blur-[120px]" />
+        <div className="absolute right-1/3 bottom-1/3 h-[300px] w-[300px] rounded-full bg-cyan/5 blur-[100px]" />
+      </div>
+
+      <Card className="glass relative w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl">Create your account</CardTitle>
+          <CardTitle className="text-2xl">
+            Create your <span className="text-cyan">account</span>
+          </CardTitle>
           <CardDescription>
             Start analyzing your NJ commercial energy bills
           </CardDescription>
@@ -73,7 +79,7 @@ export default function SignupPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="rounded-md bg-destructive/10 px-4 py-3 text-sm text-destructive">
+              <div className="rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
                 {error}
               </div>
             )}
@@ -107,16 +113,20 @@ export default function SignupPage() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button
+              type="submit"
+              className="w-full bg-cyan text-[#0B0F19] hover:bg-cyan/80 font-medium shadow-[0_0_20px_rgba(6,245,214,0.2)]"
+              disabled={loading}
+            >
               {loading ? "Creating account..." : "Sign up"}
             </Button>
           </form>
         </CardContent>
-        <Separator />
+        <Separator className="bg-white/5" />
         <CardFooter className="justify-center pt-6">
           <p className="text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="text-primary underline">
+            <Link href="/login" className="text-cyan hover:underline">
               Log in
             </Link>
           </p>
