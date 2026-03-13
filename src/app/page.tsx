@@ -1,16 +1,11 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { FileText, BarChart3, Zap, Phone } from "lucide-react";
+import { buttonVariants } from "@/lib/button-variants";
+import { FileText, BarChart3, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ScheduleCallModal } from "@/components/schedule-call-modal";
+import { ScheduleCallButton } from "@/components/schedule-call-button";
 import { PriceTicker } from "@/components/price-ticker";
 
 export default function Home() {
-  const [callModalOpen, setCallModalOpen] = useState(false);
-
   return (
     <div className="min-h-screen flex flex-col bg-grid">
       {/* Nav */}
@@ -99,16 +94,7 @@ export default function Home() {
               >
                 Log In
               </Link>
-              <button
-                onClick={() => setCallModalOpen(true)}
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "border-purple/30 hover:border-purple/60 hover:text-purple text-purple/80 gap-2"
-                )}
-              >
-                <Phone className="h-4 w-4" />
-                Schedule a Call
-              </button>
+              <ScheduleCallButton />
             </div>
           </div>
         </section>
@@ -157,8 +143,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      <ScheduleCallModal open={callModalOpen} onClose={() => setCallModalOpen(false)} />
 
       {/* Footer */}
       <footer className="border-t border-white/5 py-6">

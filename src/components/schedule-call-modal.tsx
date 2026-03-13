@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { X, Phone, CheckCircle2, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+type ScheduleCallResponse = { success: true; id: string } | { error: string };
 
 type Props = {
   open: boolean;
@@ -18,16 +20,19 @@ export function ScheduleCallModal({ open, onClose }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Reset form when modal opens
+  const handleClose = useCallback(() => {
+    onClose();
+  }, [onClose]);
+
+  // Escape key handler
   useEffect(() => {
-    if (open) {
-      setName("");
-      setEmail("");
-      setPhone("");
-      setError("");
-      setSubmitted(false);
+    if (!open) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") handleClose();
     }
-  }, [open]);
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open, handleClose]);
 
   if (!open) return null;
 
@@ -43,10 +48,10 @@ export function ScheduleCallModal({ open, onClose }: Props) {
         body: JSON.stringify({ name, email, phone }),
       });
 
-      const data = await res.json();
+      const data: ScheduleCallResponse = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Something went wrong.");
+        setError("error" in data ? data.error : "Something went wrong.");
         return;
       }
 
@@ -59,18 +64,24 @@ export function ScheduleCallModal({ open, onClose }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center">
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="schedule-call-title"
+    >
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={handleClose}
       />
 
       {/* Modal */}
       <div className="glass relative w-full max-w-md mx-4 rounded-2xl p-8 shadow-[0_0_60px_rgba(6,245,214,0.08)]">
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
+          aria-label="Close"
         >
           <X className="h-5 w-5" />
         </button>
@@ -84,7 +95,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
               help with your energy bills.
             </p>
             <button
-              onClick={onClose}
+              onClick={handleClose}
               className="mt-6 rounded-lg bg-cyan px-6 py-2 text-sm font-semibold text-[#0B0F19] hover:bg-cyan/80 transition-colors"
             >
               Close
@@ -97,7 +108,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
                 <Phone className="h-5 w-5 text-cyan" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Schedule a Call</h3>
+                <h3 id="schedule-call-title" className="text-lg font-semibold">Schedule a Call</h3>
                 <p className="text-sm text-muted-foreground">
                   We&apos;ll reach out to discuss your energy needs.
                 </p>
@@ -113,6 +124,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
+                  maxLength={200}
                 />
               </div>
 
@@ -125,6 +137,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  maxLength={320}
                 />
               </div>
 
@@ -137,6 +150,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
+                  maxLength={20}
                 />
               </div>
 

@@ -1,7 +1,6 @@
-"use client";
-
 import { TrendingUp, TrendingDown } from "lucide-react";
 
+// Static display values — not live data
 const prices = [
   { label: "NJ Electricity (Residential)", value: "$0.1842/kWh", change: +2.1 },
   { label: "NJ Electricity (Commercial)", value: "$0.1356/kWh", change: -0.8 },
@@ -13,7 +12,13 @@ const prices = [
   { label: "JCP&L BGS Rate", value: "$0.1089/kWh", change: +0.3 },
 ];
 
-function PriceItem({ label, value, change }: (typeof prices)[number]) {
+type PriceEntry = {
+  label: string;
+  value: string;
+  change: number;
+};
+
+function PriceItem({ label, value, change }: PriceEntry) {
   const isUp = change >= 0;
   return (
     <span className="inline-flex items-center gap-2 px-6 text-sm whitespace-nowrap">
