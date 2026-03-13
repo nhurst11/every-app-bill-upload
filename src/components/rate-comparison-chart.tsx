@@ -74,19 +74,19 @@ export function RateComparisonChart({
           <CartesianGrid
             horizontal={false}
             strokeDasharray="3 3"
-            stroke="rgba(255,255,255,0.06)"
+            stroke="rgba(0,0,0,0.08)"
           />
           <XAxis
             type="number"
             tickFormatter={(v) => `${v}¢`}
-            stroke="rgba(255,255,255,0.3)"
+            stroke="rgba(0,0,0,0.3)"
             fontSize={12}
           />
           <YAxis
             type="category"
             dataKey="name"
             width={100}
-            stroke="rgba(255,255,255,0.3)"
+            stroke="rgba(0,0,0,0.3)"
             fontSize={11}
             tickLine={false}
           />

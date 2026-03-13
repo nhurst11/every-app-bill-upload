@@ -69,16 +69,16 @@ export function DashboardCharts({ bills }: { bills: Bill[] }) {
             </defs>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.06)"
+              stroke="rgba(0,0,0,0.08)"
             />
             <XAxis
               dataKey="date"
-              stroke="rgba(255,255,255,0.3)"
+              stroke="rgba(0,0,0,0.3)"
               fontSize={12}
               tickLine={false}
             />
             <YAxis
-              stroke="rgba(255,255,255,0.3)"
+              stroke="rgba(0,0,0,0.3)"
               fontSize={12}
               tickFormatter={(v) => `$${v}`}
               tickLine={false}
@@ -111,16 +111,16 @@ export function DashboardCharts({ bills }: { bills: Bill[] }) {
           <LineChart data={data}>
             <CartesianGrid
               strokeDasharray="3 3"
-              stroke="rgba(255,255,255,0.06)"
+              stroke="rgba(0,0,0,0.08)"
             />
             <XAxis
               dataKey="date"
-              stroke="rgba(255,255,255,0.3)"
+              stroke="rgba(0,0,0,0.3)"
               fontSize={12}
               tickLine={false}
             />
             <YAxis
-              stroke="rgba(255,255,255,0.3)"
+              stroke="rgba(0,0,0,0.3)"
               fontSize={12}
               tickFormatter={(v) => `${v.toLocaleString()}`}
               tickLine={false}
