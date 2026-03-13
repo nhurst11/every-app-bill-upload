@@ -58,7 +58,7 @@ export default async function DashboardPage() {
       <header className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <span className="text-xl font-semibold tracking-tight">
-            <span className="text-cyan">NJ</span> Bill Analyzer
+            <span className="text-accent-color">NJ</span> Bill Analyzer
           </span>
           <form
             action={async () => {
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
             <Button
               variant="outline"
               type="submit"
-              className="border-white/10 hover:border-cyan/30 hover:text-cyan"
+              className="border-white/10 hover:border-accent-color/30 hover:text-accent-color"
             >
               Log out
             </Button>
@@ -80,7 +80,7 @@ export default async function DashboardPage() {
       {/* Dashboard Content */}
       <main className="container mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold">
-          Welcome, <span className="text-cyan">{session.user.name || "there"}</span>!
+          Welcome, <span className="text-accent-color">{session.user.name || "there"}</span>!
         </h1>
         <p className="mt-2 text-muted-foreground">
           Your NJ commercial energy bill dashboard
@@ -94,33 +94,33 @@ export default async function DashboardPage() {
               label: "Bills Uploaded",
               description: "Total bills analyzed",
               value: billCount.toString(),
-              color: "cyan" as const,
+              color: "accent" as const,
             },
             {
               icon: DollarSign,
               label: "Total Spent",
               description: "Across all bills",
               value: `$${totalSpent.toFixed(2)}`,
-              color: "purple" as const,
+              color: "alt" as const,
             },
             {
               icon: Zap,
               label: "Total kWh",
               description: "Energy consumed",
               value: totalKwh.toLocaleString(),
-              color: "cyan" as const,
+              color: "accent" as const,
             },
           ].map((stat) => (
             <div
               key={stat.label}
-              className="glass rounded-xl p-6 transition-all hover:border-cyan/20"
+              className="glass rounded-xl p-6 transition-all hover:border-accent-color/20"
             >
               <div className="flex items-center gap-3 mb-3">
                 <div
                   className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                    stat.color === "cyan"
-                      ? "bg-cyan/10 text-cyan"
-                      : "bg-purple/10 text-purple"
+                    stat.color === "accent"
+                      ? "bg-accent-color/10 text-accent-color"
+                      : "bg-accent-alt/10 text-accent-alt"
                   }`}
                 >
                   <stat.icon className="h-5 w-5" />

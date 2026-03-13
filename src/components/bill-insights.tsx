@@ -40,9 +40,9 @@ export function BillInsights({ billId, cachedInsights }: BillInsightsProps) {
   // Loading state with shimmer animation
   if (loading) {
     return (
-      <div className="relative overflow-hidden rounded-xl border border-cyan/20 bg-gradient-to-br from-cyan/5 to-purple/5 p-6">
+      <div className="relative overflow-hidden rounded-xl border border-accent-color/20 bg-gradient-to-br from-accent-color/5 to-accent-alt/5 p-6">
         <div className="flex items-center gap-2 mb-4">
-          <Sparkles className="h-5 w-5 text-cyan animate-pulse" />
+          <Sparkles className="h-5 w-5 text-accent-color animate-pulse" />
           <h3 className="text-lg font-semibold">Generating AI Insights...</h3>
         </div>
         <div className="space-y-3">
@@ -66,15 +66,15 @@ export function BillInsights({ billId, cachedInsights }: BillInsightsProps) {
   // No insights yet — show generate button
   if (!insights) {
     return (
-      <div className="relative overflow-hidden rounded-xl border border-cyan/20 bg-gradient-to-br from-cyan/5 to-purple/5 p-6 text-center">
-        <Sparkles className="mx-auto h-8 w-8 text-cyan mb-3" />
+      <div className="relative overflow-hidden rounded-xl border border-accent-color/20 bg-gradient-to-br from-accent-color/5 to-accent-alt/5 p-6 text-center">
+        <Sparkles className="mx-auto h-8 w-8 text-accent-color mb-3" />
         <h3 className="text-lg font-semibold mb-1">AI Bill Insights</h3>
         <p className="text-sm text-muted-foreground mb-4">
           Get personalized analysis of your bill against current NJ market rates
         </p>
         <Button
           onClick={generateInsights}
-          className="bg-cyan hover:bg-cyan/90 text-black font-medium"
+          className="bg-accent-color hover:bg-accent-color/90 text-black font-medium"
         >
           <Sparkles className="mr-2 h-4 w-4" />
           Generate Insights
@@ -88,15 +88,15 @@ export function BillInsights({ billId, cachedInsights }: BillInsightsProps) {
 
   // Render insights with simple markdown-to-HTML
   return (
-    <div className="relative overflow-hidden rounded-xl border border-cyan/20 bg-gradient-to-br from-cyan/5 to-purple/5 p-6">
+    <div className="relative overflow-hidden rounded-xl border border-accent-color/20 bg-gradient-to-br from-accent-color/5 to-accent-alt/5 p-6">
       <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="h-5 w-5 text-cyan" />
+        <Sparkles className="h-5 w-5 text-accent-color" />
         <h3 className="text-lg font-semibold">AI Bill Insights</h3>
       </div>
       <div
         className="prose prose-invert prose-sm max-w-none
           prose-headings:text-foreground prose-p:text-muted-foreground
-          prose-strong:text-cyan prose-li:text-muted-foreground"
+          prose-strong:text-accent-color prose-li:text-muted-foreground"
         dangerouslySetInnerHTML={{ __html: markdownToHtml(insights) }}
       />
     </div>

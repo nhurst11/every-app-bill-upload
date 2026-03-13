@@ -73,12 +73,12 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
           onDrop={handleDrop}
           className={`flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-8 transition-all ${
             dragOver
-              ? "border-cyan bg-cyan/5 shadow-[0_0_30px_rgba(6,245,214,0.1)]"
-              : "border-white/10 hover:border-cyan/30"
+              ? "border-accent-color bg-accent-color/5 shadow-[0_0_30px_rgba(255,102,0,0.1)]"
+              : "border-white/10 hover:border-accent-color/30"
           }`}
         >
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-cyan/10 mb-4">
-            <Upload className="h-7 w-7 text-cyan" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent-color/10 mb-4">
+            <Upload className="h-7 w-7 text-accent-color" />
           </div>
           <p className="mb-2 text-lg font-medium">
             Drop your energy bill here
@@ -87,7 +87,7 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
             PDF, PNG, or JPG up to 10MB
           </p>
           <label className="cursor-pointer">
-            <span className="inline-flex h-9 items-center justify-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:border-cyan/30 hover:text-cyan transition-colors">
+            <span className="inline-flex h-9 items-center justify-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:border-accent-color/30 hover:text-accent-color transition-colors">
               Browse files
             </span>
             <input
@@ -102,8 +102,8 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
 
       {status === "uploading" && (
         <div className="flex flex-col items-center justify-center py-8">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-purple/10 mb-4">
-            <FileText className="h-7 w-7 animate-pulse text-purple" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent-alt/10 mb-4">
+            <FileText className="h-7 w-7 animate-pulse text-accent-alt" />
           </div>
           <p className="mb-2 text-lg font-medium">Analyzing your bill...</p>
           <p className="mb-4 text-sm text-muted-foreground">
@@ -115,10 +115,10 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
 
       {status === "success" && (
         <div className="flex flex-col items-center justify-center py-8">
-          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-cyan/10 mb-4">
-            <CheckCircle className="h-7 w-7 text-cyan" />
+          <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent-color/10 mb-4">
+            <CheckCircle className="h-7 w-7 text-accent-color" />
           </div>
-          <p className="text-lg font-medium text-cyan text-glow-cyan">
+          <p className="text-lg font-medium text-accent-color text-glow-accent">
             Bill analyzed successfully!
           </p>
           <p className="text-sm text-muted-foreground">Refreshing...</p>
@@ -138,7 +138,7 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
           </p>
           <Button
             variant="outline"
-            className="border-white/10 hover:border-cyan/30 hover:text-cyan"
+            className="border-white/10 hover:border-accent-color/30 hover:text-accent-color"
             onClick={() => {
               setStatus("idle");
               setErrorMessage("");

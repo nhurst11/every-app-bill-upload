@@ -49,13 +49,13 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4 bg-grid">
       {/* Background glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-1/3 -translate-x-1/2 h-[400px] w-[400px] rounded-full bg-cyan/5 blur-[120px]" />
+        <div className="absolute left-1/2 top-1/3 -translate-x-1/2 h-[400px] w-[400px] rounded-full bg-accent-color/5 blur-[120px]" />
       </div>
 
       <Card className="glass relative w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">
-            Welcome <span className="text-cyan">back</span>
+            Welcome <span className="text-accent-color">back</span>
           </CardTitle>
           <CardDescription>
             Log in to your NJ Bill Analyzer account
@@ -90,7 +90,7 @@ export default function LoginPage() {
             </div>
             <Button
               type="submit"
-              className="w-full bg-cyan text-[#0B0F19] hover:bg-cyan/80 font-medium shadow-[0_0_20px_rgba(6,245,214,0.2)]"
+              className="w-full bg-accent-color text-primary-foreground hover:bg-accent-color/80 font-medium shadow-[0_0_20px_rgba(255,102,0,0.2)]"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Log in"}
@@ -101,7 +101,7 @@ export default function LoginPage() {
         <CardFooter className="justify-center pt-6">
           <p className="text-sm text-muted-foreground">
             Don&apos;t have an account?{" "}
-            <Link href="/signup" className="text-cyan hover:underline">
+            <Link href="/signup" className="text-accent-color hover:underline">
               Sign up
             </Link>
           </p>
