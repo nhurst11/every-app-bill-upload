@@ -70,7 +70,7 @@ export function BillsTable({ bills }: { bills: Bill[] }) {
                 <Badge
                   className={
                     bill.status === "analyzed"
-                      ? "bg-cyan/10 text-cyan border-cyan/20 hover:bg-cyan/15"
+                      ? "bg-accent-color/10 text-accent-color border-accent-color/20 hover:bg-accent-color/15"
                       : "bg-red-500/10 text-red-400 border-red-500/20 hover:bg-red-500/15"
                   }
                   variant="outline"
@@ -84,7 +84,7 @@ export function BillsTable({ bills }: { bills: Bill[] }) {
               <TableCell>
                 <Link
                   href={`/dashboard/bills/${bill.id}`}
-                  className="text-sm text-cyan hover:underline underline-offset-4"
+                  className="text-sm text-accent-color hover:underline underline-offset-4"
                 >
                   View
                 </Link>

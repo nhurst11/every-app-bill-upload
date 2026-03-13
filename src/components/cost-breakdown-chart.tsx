@@ -77,7 +77,7 @@ export function CostBreakdownChart({
             innerRadius={60}
             outerRadius={100}
             strokeWidth={2}
-            stroke="rgba(11, 15, 25, 0.8)"
+            stroke="rgba(26, 26, 26, 0.8)"
           >
             {segments.map((_, i) => (
               <Cell key={i} fill={colors[i]} />

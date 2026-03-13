@@ -61,7 +61,7 @@ export function SavingsCard({
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
             Your supply rate
           </p>
-          <p className="text-3xl font-bold tabular-nums text-cyan text-glow-cyan">
+          <p className="text-3xl font-bold tabular-nums text-accent-color text-glow-accent">
             {supplyRate.toFixed(2)}&cent;<span className="text-base font-normal text-muted-foreground">/kWh</span>
           </p>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -72,7 +72,7 @@ export function SavingsCard({
                 ({(supplyRate - utility.supplyRate).toFixed(2)}&cent; more)
               </span>
             ) : (
-              <span className="ml-2 text-cyan">
+              <span className="ml-2 text-accent-color">
                 ({(utility.supplyRate - supplyRate).toFixed(2)}&cent; less)
               </span>
             )}
@@ -113,13 +113,13 @@ export function SavingsCard({
                           {supplier.renewable && (
                             <Badge
                               variant="outline"
-                              className="ml-2 bg-cyan/5 text-cyan border-cyan/20"
+                              className="ml-2 bg-accent-color/5 text-accent-color border-accent-color/20"
                             >
                               Green
                             </Badge>
                           )}
                           {isBest && (
-                            <Badge className="ml-2 bg-gradient-to-r from-cyan to-purple text-[#0B0F19] border-0">
+                            <Badge className="ml-2 bg-gradient-to-r from-accent-color to-accent-alt text-[#1A1A1A] border-0">
                               Best
                             </Badge>
                           )}
@@ -128,10 +128,10 @@ export function SavingsCard({
                           {s.comparisonRate.toFixed(2)}&cent;
                         </TableCell>
                         <TableCell className="text-muted-foreground">{supplier.term}</TableCell>
-                        <TableCell className="text-right tabular-nums font-medium text-cyan">
+                        <TableCell className="text-right tabular-nums font-medium text-accent-color">
                           ${s.monthlySavings.toFixed(2)}
                         </TableCell>
-                        <TableCell className="text-right tabular-nums font-medium text-cyan">
+                        <TableCell className="text-right tabular-nums font-medium text-accent-color">
                           ${s.annualSavings.toFixed(2)}
                         </TableCell>
                       </TableRow>
@@ -142,8 +142,8 @@ export function SavingsCard({
           </div>
         </>
       ) : (
-        <div className="rounded-xl bg-cyan/5 border border-cyan/10 p-5 text-center">
-          <p className="text-lg font-medium text-cyan text-glow-cyan">
+        <div className="rounded-xl bg-accent-color/5 border border-accent-color/10 p-5 text-center">
+          <p className="text-lg font-medium text-accent-color text-glow-accent">
             You&apos;re already competitive!
           </p>
           <p className="text-sm text-muted-foreground mt-1">

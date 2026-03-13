@@ -34,7 +34,7 @@ export function Onboarding({ onUploadComplete }: OnboardingProps) {
       {/* Welcome */}
       <div className="glass rounded-xl p-8 text-center">
         <h2 className="text-2xl font-bold mb-2">
-          Get started with <span className="text-cyan">NJ Bill Analyzer</span>
+          Get started with <span className="text-accent-color">NJ Bill Analyzer</span>
         </h2>
         <p className="text-muted-foreground max-w-lg mx-auto">
           Upload your first commercial energy bill and we&apos;ll break down your
@@ -51,8 +51,8 @@ export function Onboarding({ onUploadComplete }: OnboardingProps) {
               <div
                 className={`flex h-14 w-14 items-center justify-center rounded-xl ${
                   step.color === "cyan"
-                    ? "bg-cyan/10 text-cyan"
-                    : "bg-purple/10 text-purple"
+                    ? "bg-accent-color/10 text-accent-color"
+                    : "bg-accent-alt/10 text-accent-alt"
                 }`}
               >
                 <step.icon className="h-7 w-7" />
@@ -60,7 +60,7 @@ export function Onboarding({ onUploadComplete }: OnboardingProps) {
             </div>
             {/* Step number badge */}
             <div className="flex justify-center mb-3">
-              <span className="gradient-cyan-purple text-xs font-bold h-6 w-6 rounded-full flex items-center justify-center text-background">
+              <span className="gradient-accent text-xs font-bold h-6 w-6 rounded-full flex items-center justify-center text-background">
                 {i + 1}
               </span>
             </div>

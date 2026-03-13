@@ -42,14 +42,14 @@ export default function BlogPage() {
       <header className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <Link href="/" className="text-xl font-semibold tracking-tight">
-            <span className="text-cyan">NJ</span> Bill Analyzer
+            <span className="text-accent-color">NJ</span> Bill Analyzer
           </Link>
           <div className="flex gap-2">
             <Link
               href="/login"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
-                "text-muted-foreground hover:text-cyan"
+                "text-muted-foreground hover:text-accent-color"
               )}
             >
               Log in
@@ -58,7 +58,7 @@ export default function BlogPage() {
               href="/signup"
               className={cn(
                 buttonVariants(),
-                "bg-cyan text-[#0B0F19] hover:bg-cyan/80 font-medium"
+                "bg-accent-color text-[#1A1A1A] hover:bg-accent-color/80 font-medium"
               )}
             >
               Sign up
@@ -71,7 +71,7 @@ export default function BlogPage() {
         {/* Back link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-cyan mb-8"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-accent-color mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to home
@@ -79,13 +79,13 @@ export default function BlogPage() {
 
         {/* Header */}
         <div className="mb-12">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan/20 bg-cyan/5 px-4 py-1.5 text-sm text-cyan">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-accent-color/20 bg-accent-color/5 px-4 py-1.5 text-sm text-accent-color">
             <Zap className="h-3.5 w-3.5" />
             Energy Insights
           </div>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
             Blog &{" "}
-            <span className="bg-gradient-to-r from-cyan to-purple bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-accent-color to-accent-alt bg-clip-text text-transparent">
               Tips
             </span>
           </h1>
@@ -100,14 +100,14 @@ export default function BlogPage() {
           {posts.map((post) => (
             <article
               key={post.id}
-              className="glass group rounded-xl p-6 transition-all hover:border-cyan/20 hover:shadow-[0_0_30px_rgba(6,245,214,0.05)] flex flex-col"
+              className="glass group rounded-xl p-6 transition-all hover:border-accent-color/20 hover:shadow-[0_0_30px_rgba(255,102,0,0.05)] flex flex-col"
             >
               <div className="mb-3">
-                <span className="inline-block rounded-full border border-purple/30 bg-purple/10 px-3 py-0.5 text-xs font-medium text-purple">
+                <span className="inline-block rounded-full border border-accent-alt/30 bg-accent-alt/10 px-3 py-0.5 text-xs font-medium text-accent-alt">
                   {post.tag}
                 </span>
               </div>
-              <h2 className="text-lg font-semibold mb-2 group-hover:text-cyan transition-colors">
+              <h2 className="text-lg font-semibold mb-2 group-hover:text-accent-color transition-colors">
                 {post.title}
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed flex-1">

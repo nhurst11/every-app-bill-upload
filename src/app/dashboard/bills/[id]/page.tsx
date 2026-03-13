@@ -52,14 +52,14 @@ export default async function BillDetailPage({
             <Button
               variant="ghost"
               size="sm"
-              className="hover:text-cyan hover:bg-cyan/5"
+              className="hover:text-accent-color hover:bg-accent-color/5"
             >
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Dashboard
             </Button>
           </Link>
           <span className="text-xl font-semibold tracking-tight">
-            <span className="text-cyan">NJ</span> Bill Analyzer
+            <span className="text-accent-color">NJ</span> Bill Analyzer
           </span>
         </div>
       </header>
@@ -72,7 +72,7 @@ export default async function BillDetailPage({
             variant="outline"
             className={
               bill.status === "analyzed"
-                ? "bg-cyan/10 text-cyan border-cyan/20"
+                ? "bg-accent-color/10 text-accent-color border-accent-color/20"
                 : "bg-red-500/10 text-red-400 border-red-500/20"
             }
           >
@@ -119,7 +119,7 @@ export default async function BillDetailPage({
               <div className="flex items-center gap-2 mb-2">
                 <metric.icon
                   className={`h-4 w-4 ${
-                    metric.color === "cyan" ? "text-cyan" : "text-purple"
+                    metric.color === "cyan" ? "text-accent-color" : "text-accent-alt"
                   }`}
                 />
                 <span className="text-xs uppercase tracking-wider text-muted-foreground">

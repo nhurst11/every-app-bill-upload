@@ -63,14 +63,14 @@ export default function SignupPage() {
     <div className="min-h-screen flex items-center justify-center px-4 bg-grid">
       {/* Background glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute left-1/3 top-1/3 h-[400px] w-[400px] rounded-full bg-purple/5 blur-[120px]" />
-        <div className="absolute right-1/3 bottom-1/3 h-[300px] w-[300px] rounded-full bg-cyan/5 blur-[100px]" />
+        <div className="absolute left-1/3 top-1/3 h-[400px] w-[400px] rounded-full bg-accent-alt/5 blur-[120px]" />
+        <div className="absolute right-1/3 bottom-1/3 h-[300px] w-[300px] rounded-full bg-accent-color/5 blur-[100px]" />
       </div>
 
       <Card className="glass relative w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl">
-            Create your <span className="text-cyan">account</span>
+            Create your <span className="text-accent-color">account</span>
           </CardTitle>
           <CardDescription>
             Start analyzing your NJ commercial energy bills
@@ -115,7 +115,7 @@ export default function SignupPage() {
             </div>
             <Button
               type="submit"
-              className="w-full bg-cyan text-[#0B0F19] hover:bg-cyan/80 font-medium shadow-[0_0_20px_rgba(6,245,214,0.2)]"
+              className="w-full bg-accent-color text-[#1A1A1A] hover:bg-accent-color/80 font-medium shadow-[0_0_20px_rgba(255,102,0,0.2)]"
               disabled={loading}
             >
               {loading ? "Creating account..." : "Sign up"}
@@ -126,7 +126,7 @@ export default function SignupPage() {
         <CardFooter className="justify-center pt-6">
           <p className="text-sm text-muted-foreground">
             Already have an account?{" "}
-            <Link href="/login" className="text-cyan hover:underline">
+            <Link href="/login" className="text-accent-color hover:underline">
               Log in
             </Link>
           </p>
