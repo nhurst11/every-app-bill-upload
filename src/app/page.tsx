@@ -6,6 +6,7 @@ import { buttonVariants } from "@/components/ui/button";
 import { FileText, BarChart3, Zap, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ScheduleCallModal } from "@/components/schedule-call-modal";
+import { PriceTicker } from "@/components/price-ticker";
 
 export default function Home() {
   const [callModalOpen, setCallModalOpen] = useState(false);
@@ -49,6 +50,9 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Real-time price ticker */}
+      <PriceTicker />
 
       {/* Hero */}
       <main className="flex-1">
