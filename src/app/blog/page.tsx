@@ -29,7 +29,7 @@ const posts = [
     title: "5 Ways to Reduce Your Commercial Energy Costs This Summer",
     excerpt:
       "Summer peak demand charges can spike your bill. These five strategies help NJ businesses stay ahead of seasonal rate increases.",
-    date: null,
+    date: "2026-02-28",
     readTime: "3 min read",
     tag: "Tips",
   },
