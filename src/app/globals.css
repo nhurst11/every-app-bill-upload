@@ -172,3 +172,25 @@
   font-variant-numeric: tabular-nums;
   font-family: var(--font-mono), ui-monospace, monospace;
 }
+
+/* Price ticker */
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+}
+
+.ticker-content {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  animation: ticker-scroll 30s linear infinite;
+}
