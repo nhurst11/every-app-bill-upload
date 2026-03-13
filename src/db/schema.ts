@@ -94,3 +94,13 @@ export const bills = pgTable("bills", {
   status: varchar("status", { length: 50 }).default("pending").notNull(),
   uploadedAt: timestamp("uploaded_at", { mode: "date" }).defaultNow().notNull(),
 });
+
+// ─── Call Requests ──────────────────────────────────────────
+
+export const callRequests = pgTable("call_requests", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: varchar("phone", { length: 20 }).notNull(),
+  createdAt: timestamp("created_at", { mode: "date" }).defaultNow().notNull(),
+});
