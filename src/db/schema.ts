@@ -90,6 +90,7 @@ export const bills = pgTable("bills", {
   taxesAndFees: numeric("taxes_and_fees", { precision: 10, scale: 2 }),
   rateClass: varchar("rate_class", { length: 50 }),
   analysisJson: text("analysis_json"),
+  insights: text("insights"),
   status: varchar("status", { length: 50 }).default("pending").notNull(),
   uploadedAt: timestamp("uploaded_at", { mode: "date" }).defaultNow().notNull(),
 });

@@ -10,6 +10,7 @@ import { SavingsCard } from "@/components/savings-card";
 import { ArrowLeft, Zap, DollarSign, Gauge } from "lucide-react";
 import { CostBreakdownChart } from "@/components/cost-breakdown-chart";
 import { RateComparisonChart } from "@/components/rate-comparison-chart";
+import { BillInsights } from "@/components/bill-insights";
 
 export default async function BillDetailPage({
   params,
@@ -219,6 +220,16 @@ export default async function BillDetailPage({
             totalKwh={bill.totalKwh}
           />
         </div>
+
+        {/* AI Insights */}
+        {bill.status === "analyzed" && (
+          <div className="mt-6">
+            <BillInsights
+              billId={bill.id}
+              cachedInsights={bill.insights}
+            />
+          </div>
+        )}
       </main>
     </div>
   );
