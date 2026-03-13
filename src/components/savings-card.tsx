@@ -57,7 +57,7 @@ export function SavingsCard({
 
       {/* Current rate comparison */}
       {utility && (
-        <div className="mb-6 rounded-xl bg-white/[0.03] border border-white/5 p-5">
+        <div className="mb-6 rounded-xl bg-white/[0.03] border border-border p-5">
           <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
             Your supply rate
           </p>
@@ -86,10 +86,10 @@ export function SavingsCard({
           <p className="mb-3 text-sm font-medium">
             Third-party supplier options:
           </p>
-          <div className="rounded-xl overflow-hidden border border-white/5">
+          <div className="rounded-xl overflow-hidden border border-border">
             <Table>
               <TableHeader>
-                <TableRow className="border-white/5 hover:bg-transparent">
+                <TableRow className="border-border hover:bg-transparent">
                   <TableHead className="text-muted-foreground">Supplier</TableHead>
                   <TableHead className="text-right text-muted-foreground">Rate</TableHead>
                   <TableHead className="text-muted-foreground">Term</TableHead>
@@ -107,7 +107,7 @@ export function SavingsCard({
                     )!;
                     const isBest = s.supplier === bestSaving.supplier;
                     return (
-                      <TableRow key={s.supplier} className="border-white/5 hover:bg-white/[0.02]">
+                      <TableRow key={s.supplier} className="border-border hover:bg-card">
                         <TableCell className="font-medium">
                           {s.supplier}
                           {supplier.renewable && (

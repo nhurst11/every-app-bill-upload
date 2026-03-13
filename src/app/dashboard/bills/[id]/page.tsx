@@ -46,7 +46,7 @@ export default async function BillDetailPage({
   return (
     <div className="min-h-screen bg-grid">
       {/* Header */}
-      <header className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-border backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto flex items-center gap-4 px-4 py-4">
           <Link href="/dashboard">
             <Button
@@ -148,7 +148,7 @@ export default async function BillDetailPage({
                 },
                 { label: "Rate Class", value: bill.rateClass ?? "—" },
               ].map((item) => (
-                <div key={item.label} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                <div key={item.label} className="flex justify-between items-center border-b border-border pb-3 last:border-0 last:pb-0">
                   <dt className="text-sm text-muted-foreground">{item.label}</dt>
                   <dd className="font-medium">{item.value}</dd>
                 </div>
@@ -185,7 +185,7 @@ export default async function BillDetailPage({
                 { label: "Demand Charges", value: formatMoney(bill.demandCharges) },
                 { label: "Taxes & Fees", value: formatMoney(bill.taxesAndFees) },
               ].map((item) => (
-                <div key={item.label} className="flex justify-between items-center border-b border-white/5 pb-3 last:border-0 last:pb-0">
+                <div key={item.label} className="flex justify-between items-center border-b border-border pb-3 last:border-0 last:pb-0">
                   <dt className="text-sm text-muted-foreground">{item.label}</dt>
                   <dd className="font-medium tabular-nums">{item.value}</dd>
                 </div>

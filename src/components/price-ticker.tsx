@@ -21,18 +21,18 @@ type PriceEntry = {
 function PriceItem({ label, value, change }: PriceEntry) {
   const isUp = change >= 0;
   return (
-    <span className="inline-flex items-center gap-2 px-6 text-sm whitespace-nowrap">
+    <span className="inline-flex items-center gap-3 px-8 text-base whitespace-nowrap">
       <span className="text-muted-foreground">{label}</span>
-      <span className="font-mono font-semibold text-foreground">{value}</span>
+      <span className="font-mono font-bold text-foreground text-lg">{value}</span>
       <span
-        className={`inline-flex items-center gap-0.5 font-mono text-xs ${
-          isUp ? "text-emerald-400" : "text-red-400"
+        className={`inline-flex items-center gap-0.5 font-mono text-sm font-semibold ${
+          isUp ? "text-emerald-600" : "text-red-600"
         }`}
       >
         {isUp ? (
-          <TrendingUp className="h-3 w-3" />
+          <TrendingUp className="h-4 w-4" />
         ) : (
-          <TrendingDown className="h-3 w-3" />
+          <TrendingDown className="h-4 w-4" />
         )}
         {isUp ? "+" : ""}
         {change}%
@@ -43,7 +43,7 @@ function PriceItem({ label, value, change }: PriceEntry) {
 
 export function PriceTicker() {
   return (
-    <div className="w-full overflow-hidden border-b border-white/5 bg-white/[0.02]">
+    <div className="w-full overflow-hidden border-b border-border bg-card">
       <div className="ticker-track">
         <div className="ticker-content">
           {prices.map((p) => (

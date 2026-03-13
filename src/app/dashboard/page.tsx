@@ -55,7 +55,7 @@ export default async function DashboardPage() {
   return (
     <div className="min-h-screen bg-grid">
       {/* Dashboard Nav */}
-      <header className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-border backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <span className="text-xl font-semibold tracking-tight">
             <span className="text-accent-color">NJ</span> Bill Analyzer
@@ -69,7 +69,7 @@ export default async function DashboardPage() {
             <Button
               variant="outline"
               type="submit"
-              className="border-white/10 hover:border-accent-color/30 hover:text-accent-color"
+              className="border-border hover:border-accent-color/30 hover:text-accent-color"
             >
               Log out
             </Button>

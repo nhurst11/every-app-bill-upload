@@ -74,7 +74,7 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
           className={`flex flex-col items-center justify-center rounded-lg border-2 border-dashed p-8 transition-all ${
             dragOver
               ? "border-accent-color bg-accent-color/5 shadow-[0_0_30px_rgba(255,102,0,0.1)]"
-              : "border-white/10 hover:border-accent-color/30"
+              : "border-border hover:border-accent-color/30"
           }`}
         >
           <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-accent-color/10 mb-4">
@@ -87,7 +87,7 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
             PDF, PNG, or JPG up to 10MB
           </p>
           <label className="cursor-pointer">
-            <span className="inline-flex h-9 items-center justify-center rounded-md border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium hover:border-accent-color/30 hover:text-accent-color transition-colors">
+            <span className="inline-flex h-9 items-center justify-center rounded-md border border-border bg-white/5 px-4 py-2 text-sm font-medium hover:border-accent-color/30 hover:text-accent-color transition-colors">
               Browse files
             </span>
             <input
@@ -138,7 +138,7 @@ export function BillUpload({ onUploadComplete }: { onUploadComplete?: () => void
           </p>
           <Button
             variant="outline"
-            className="border-white/10 hover:border-accent-color/30 hover:text-accent-color"
+            className="border-border hover:border-accent-color/30 hover:text-accent-color"
             onClick={() => {
               setStatus("idle");
               setErrorMessage("");

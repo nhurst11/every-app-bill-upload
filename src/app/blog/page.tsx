@@ -39,7 +39,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen flex flex-col bg-grid">
       {/* Nav */}
-      <header className="border-b border-white/5 backdrop-blur-md sticky top-0 z-50">
+      <header className="border-b border-border backdrop-blur-md sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between px-4 py-4">
           <Link href="/" className="text-xl font-semibold tracking-tight">
             <span className="text-accent-color">NJ</span> Bill Analyzer
@@ -129,7 +129,7 @@ export default function BlogPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-6">
+      <footer className="border-t border-border py-6">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} NJ Bill Analyzer. All rights
           reserved.

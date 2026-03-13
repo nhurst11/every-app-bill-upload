@@ -25,7 +25,7 @@ interface Bill {
 export function BillsTable({ bills }: { bills: Bill[] }) {
   if (bills.length === 0) {
     return (
-      <div className="glass flex flex-col items-center justify-center rounded-xl border border-dashed border-white/10 py-12">
+      <div className="glass flex flex-col items-center justify-center rounded-xl border border-dashed border-border py-12">
         <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-white/5 mb-4">
           <FileText className="h-7 w-7 text-muted-foreground" />
         </div>
@@ -41,7 +41,7 @@ export function BillsTable({ bills }: { bills: Bill[] }) {
     <div className="glass rounded-xl overflow-hidden">
       <Table>
         <TableHeader>
-          <TableRow className="border-white/5 hover:bg-transparent">
+          <TableRow className="border-border hover:bg-transparent">
             <TableHead className="text-muted-foreground">File</TableHead>
             <TableHead className="text-muted-foreground">Utility</TableHead>
             <TableHead className="text-right text-muted-foreground">Amount</TableHead>
@@ -53,7 +53,7 @@ export function BillsTable({ bills }: { bills: Bill[] }) {
         </TableHeader>
         <TableBody>
           {bills.map((bill) => (
-            <TableRow key={bill.id} className="border-white/5 hover:bg-white/[0.02]">
+            <TableRow key={bill.id} className="border-border hover:bg-card">
               <TableCell className="font-medium">{bill.fileName}</TableCell>
               <TableCell>{bill.utilityProvider ?? "—"}</TableCell>
               <TableCell className="text-right tabular-nums">
