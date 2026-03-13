@@ -4,6 +4,7 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { FileText, BarChart3, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PriceTicker } from "@/components/price-ticker";
 
 export default function Home() {
   return (
@@ -45,6 +46,9 @@ export default function Home() {
           </div>
         </div>
       </header>
+
+      {/* Real-time price ticker */}
+      <PriceTicker />
 
       {/* Hero */}
       <main className="flex-1">
