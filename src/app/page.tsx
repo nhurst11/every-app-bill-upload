@@ -16,6 +16,15 @@ export default function Home() {
           </span>
           <div className="flex gap-2">
             <Link
+              href="/blog"
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "text-muted-foreground hover:text-cyan"
+              )}
+            >
+              Blog
+            </Link>
+            <Link
               href="/login"
               className={cn(
                 buttonVariants({ variant: "ghost" }),
