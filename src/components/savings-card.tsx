@@ -46,6 +46,15 @@ export function SavingsCard({
   );
   const hasSavings = bestSaving.annualSavings > 0;
 
+  const rowColors = [
+    "text-[#2563EB]",  // Blue
+    "text-[#16A34A]",  // Green
+    "text-[#9333EA]",  // Purple
+    "text-[#DC2626]",  // Red
+    "text-[#0891B2]",  // Cyan
+    "text-[#CA8A04]",  // Yellow
+  ];
+
   return (
     <div className="glass rounded-xl p-6">
       <h3 className="text-lg font-semibold mb-1">Savings Analysis</h3>
@@ -101,11 +110,12 @@ export function SavingsCard({
                 {savings
                   .filter((s) => s.annualSavings > 0)
                   .sort((a, b) => b.annualSavings - a.annualSavings)
-                  .map((s) => {
+                  .map((s, index) => {
                     const supplier = thirdPartySuppliers.find(
                       (tp) => tp.supplier === s.supplier
                     )!;
                     const isBest = s.supplier === bestSaving.supplier;
+                    const color = rowColors[index % rowColors.length];
                     return (
                       <TableRow key={s.supplier} className="border-border hover:bg-card">
                         <TableCell className="font-medium">
@@ -113,13 +123,13 @@ export function SavingsCard({
                           {supplier.renewable && (
                             <Badge
                               variant="outline"
-                              className="ml-2 bg-accent-color/5 text-accent-color border-accent-color/20"
+                              className="ml-2 bg-emerald-50 text-emerald-700 border-emerald-200"
                             >
                               Green
                             </Badge>
                           )}
                           {isBest && (
-                            <Badge className="ml-2 bg-gradient-to-r from-accent-color to-accent-alt text-primary-foreground border-0">
+                            <Badge className="ml-2 bg-[#1A1A1A] text-white border-0">
                               Best
                             </Badge>
                           )}
@@ -128,10 +138,10 @@ export function SavingsCard({
                           {s.comparisonRate.toFixed(2)}&cent;
                         </TableCell>
                         <TableCell className="text-muted-foreground">{supplier.term}</TableCell>
-                        <TableCell className="text-right tabular-nums font-medium text-accent-color">
+                        <TableCell className={`text-right tabular-nums font-medium ${color}`}>
                           ${s.monthlySavings.toFixed(2)}
                         </TableCell>
-                        <TableCell className="text-right tabular-nums font-medium text-accent-color">
+                        <TableCell className={`text-right tabular-nums font-medium ${color}`}>
                           ${s.annualSavings.toFixed(2)}
                         </TableCell>
                       </TableRow>
@@ -142,19 +152,19 @@ export function SavingsCard({
           </div>
 
           {/* Total Annual Savings highlight */}
-          <div className="mt-4 rounded-xl border-2 border-accent-color bg-accent-color/5 p-5">
+          <div className="mt-4 rounded-xl bg-[#16A34A] p-5 shadow-lg">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                <p className="text-xs uppercase tracking-wider text-white/70 font-semibold">
                   Total Annual Savings
                 </p>
-                <p className="text-sm text-muted-foreground mt-0.5">
+                <p className="text-sm text-white/80 mt-0.5">
                   with {bestSaving.supplier} (best rate)
                 </p>
               </div>
-              <p className="text-3xl font-bold tabular-nums text-accent-color">
+              <p className="text-3xl font-bold tabular-nums text-white">
                 ${bestSaving.annualSavings.toFixed(2)}
-                <span className="text-sm font-normal text-muted-foreground">/yr</span>
+                <span className="text-sm font-normal text-white/70">/yr</span>
               </p>
             </div>
           </div>
