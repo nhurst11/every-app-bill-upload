@@ -37,7 +37,7 @@ export default function Home() {
               href="/signup"
               className={cn(
                 buttonVariants(),
-                "bg-accent-color text-[#1A1A1A] hover:bg-accent-color/80 font-medium"
+                "bg-accent-color text-primary-foreground hover:bg-accent-color/80 font-medium"
               )}
             >
               Sign up
@@ -75,7 +75,7 @@ export default function Home() {
                   href="/signup"
                   className={cn(
                     buttonVariants({ size: "lg" }),
-                    "bg-accent-color text-[#1A1A1A] hover:bg-accent-color/80 font-semibold shadow-[0_0_30px_rgba(255,102,0,0.3)]"
+                    "bg-accent-color text-primary-foreground hover:bg-accent-color/80 font-semibold shadow-[0_0_30px_rgba(255,102,0,0.3)]"
                   )}
                 >
                   Get Started Free

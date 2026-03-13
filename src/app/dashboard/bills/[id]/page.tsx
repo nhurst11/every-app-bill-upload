@@ -119,7 +119,7 @@ export default async function BillDetailPage({
               <div className="flex items-center gap-2 mb-2">
                 <metric.icon
                   className={`h-4 w-4 ${
-                    metric.color === "cyan" ? "text-accent-color" : "text-accent-alt"
+                    metric.color === "accent" ? "text-accent-color" : "text-accent-alt"
                   }`}
                 />
                 <span className="text-xs uppercase tracking-wider text-muted-foreground">

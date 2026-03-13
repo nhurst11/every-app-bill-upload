@@ -12,19 +12,19 @@ const steps = [
     icon: Upload,
     title: "Upload Your Bill",
     description: "Drop a PDF or image of your NJ commercial energy bill",
-    color: "cyan" as const,
+    color: "accent" as const,
   },
   {
     icon: Brain,
     title: "AI Analysis",
     description: "We extract key terms, rates, and charges automatically",
-    color: "purple" as const,
+    color: "alt" as const,
   },
   {
     icon: TrendingDown,
     title: "See Savings",
     description: "Compare your rates against NJ suppliers and find savings",
-    color: "cyan" as const,
+    color: "accent" as const,
   },
 ];
 
@@ -50,7 +50,7 @@ export function Onboarding({ onUploadComplete }: OnboardingProps) {
             <div className="flex justify-center mb-4">
               <div
                 className={`flex h-14 w-14 items-center justify-center rounded-xl ${
-                  step.color === "cyan"
+                  step.color === "accent"
                     ? "bg-accent-color/10 text-accent-color"
                     : "bg-accent-alt/10 text-accent-alt"
                 }`}

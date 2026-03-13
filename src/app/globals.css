@@ -119,10 +119,6 @@
   background: linear-gradient(135deg, #FF6600, #444444);
 }
 
-.gradient-border {
-  border-image: linear-gradient(135deg, #FF6600, #444444) 1;
-}
-
 /* Technical grid pattern background */
 .bg-grid {
   background-image:

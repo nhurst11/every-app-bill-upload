@@ -94,21 +94,21 @@ export default async function DashboardPage() {
               label: "Bills Uploaded",
               description: "Total bills analyzed",
               value: billCount.toString(),
-              color: "cyan" as const,
+              color: "accent" as const,
             },
             {
               icon: DollarSign,
               label: "Total Spent",
               description: "Across all bills",
               value: `$${totalSpent.toFixed(2)}`,
-              color: "purple" as const,
+              color: "alt" as const,
             },
             {
               icon: Zap,
               label: "Total kWh",
               description: "Energy consumed",
               value: totalKwh.toLocaleString(),
-              color: "cyan" as const,
+              color: "accent" as const,
             },
           ].map((stat) => (
             <div
@@ -118,7 +118,7 @@ export default async function DashboardPage() {
               <div className="flex items-center gap-3 mb-3">
                 <div
                   className={`flex h-10 w-10 items-center justify-center rounded-lg ${
-                    stat.color === "cyan"
+                    stat.color === "accent"
                       ? "bg-accent-color/10 text-accent-color"
                       : "bg-accent-alt/10 text-accent-alt"
                   }`}

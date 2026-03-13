@@ -119,7 +119,7 @@ export function SavingsCard({
                             </Badge>
                           )}
                           {isBest && (
-                            <Badge className="ml-2 bg-gradient-to-r from-accent-color to-accent-alt text-[#1A1A1A] border-0">
+                            <Badge className="ml-2 bg-gradient-to-r from-accent-color to-accent-alt text-primary-foreground border-0">
                               Best
                             </Badge>
                           )}

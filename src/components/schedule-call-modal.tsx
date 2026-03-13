@@ -96,7 +96,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
             </p>
             <button
               onClick={handleClose}
-              className="mt-6 rounded-lg bg-accent-color px-6 py-2 text-sm font-semibold text-[#1A1A1A] hover:bg-accent-color/80 transition-colors"
+              className="mt-6 rounded-lg bg-accent-color px-6 py-2 text-sm font-semibold text-primary-foreground hover:bg-accent-color/80 transition-colors"
             >
               Close
             </button>
@@ -161,7 +161,7 @@ export function ScheduleCallModal({ open, onClose }: Props) {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full rounded-lg bg-accent-color py-2.5 text-sm font-semibold text-[#1A1A1A] hover:bg-accent-color/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full rounded-lg bg-accent-color py-2.5 text-sm font-semibold text-primary-foreground hover:bg-accent-color/80 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {submitting ? (
                   <>

@@ -58,7 +58,7 @@ export default function BlogPage() {
               href="/signup"
               className={cn(
                 buttonVariants(),
-                "bg-accent-color text-[#1A1A1A] hover:bg-accent-color/80 font-medium"
+                "bg-accent-color text-primary-foreground hover:bg-accent-color/80 font-medium"
               )}
             >
               Sign up

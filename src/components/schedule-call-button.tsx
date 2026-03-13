@@ -15,7 +15,7 @@ export function ScheduleCallButton() {
         onClick={() => setOpen(true)}
         className={cn(
           buttonVariants({ size: "lg" }),
-          "bg-accent-color text-[#1A1A1A] hover:bg-accent-color/80 font-bold gap-2 px-8 py-3 text-base shadow-[0_0_40px_rgba(255,102,0,0.4)] tracking-wide"
+          "bg-accent-color text-primary-foreground hover:bg-accent-color/80 font-bold gap-2 px-8 py-3 text-base shadow-[0_0_40px_rgba(255,102,0,0.4)] tracking-wide"
         )}
       >
         <Phone className="h-5 w-5" />
