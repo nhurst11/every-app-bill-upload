@@ -140,6 +140,24 @@ export function SavingsCard({
               </TableBody>
             </Table>
           </div>
+
+          {/* Total Annual Savings highlight */}
+          <div className="mt-4 rounded-xl border-2 border-accent-color bg-accent-color/5 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+                  Total Annual Savings
+                </p>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  with {bestSaving.supplier} (best rate)
+                </p>
+              </div>
+              <p className="text-3xl font-bold tabular-nums text-accent-color">
+                ${bestSaving.annualSavings.toFixed(2)}
+                <span className="text-sm font-normal text-muted-foreground">/yr</span>
+              </p>
+            </div>
+          </div>
         </>
       ) : (
         <div className="rounded-xl bg-accent-color/5 border border-accent-color/10 p-5 text-center">
